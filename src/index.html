@@ -6,8 +6,27 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
 </head>
 <body>
+  <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+  <script>
+    $(window).scroll(function () {
+        let $window = $(window),
+            $body = $('body'),
+            $section = $('.section');
+        let scroll = $window.scrollTop() + ($window.height() / 3);
+        $section.each(function () {
+            if ($(this).position().top <= scroll && $(this).position().top + $(this).height() > scroll) {
+                $body.removeClass(function (index, css) {
+                    return (css.match(/(^|\s)color-\s+/g) || [].join(' '));
+                });
+                $('.section').removeClass('active');
+                $(this).addClass('active');
+            }
+        });
+    }).scroll();
+</script>
   <app-root></app-root>
 </body>
 </html>
